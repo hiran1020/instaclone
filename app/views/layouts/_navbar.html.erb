@@ -1,0 +1,33 @@
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" >
+      <%= link_to "Home", root_path, class:"navbar-brand btn btn-outline-success" %>
+      
+    </a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item nav-link">
+            <button type="button" class="btn btn-outline-success position-relative">
+              <%= link_to "Posts", post_path(Post.last.id) ,class:"text-decoration-none text-dark"%>   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"> <%=Post.all.count %> <span class="visually-hidden">unread messages</span></span>
+            </button>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><button type="button" class="btn btn-outline-success position-relative text-dark">
+              Message <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">5<span class="visually-hidden">unread messages</span></span>
+            </button></a>
+        </li>
+        <li class="nav-item nav-link">
+         <%= link_to "New Post", new_post_path, class:"btn btn-outline-success text-dark" %>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

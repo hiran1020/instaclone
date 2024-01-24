@@ -1,0 +1,34 @@
+
+
+<% if notice.present? %>
+  <div class="alert alert-success" role="alert">
+    <%= notice %>
+  </div>
+<% else %>
+  <!-- Hide the alert if notice is empty -->
+<% end %>
+
+
+<div class="container position-relative">
+
+  <h1 class="position-absolute top-0 start-0">Posts</h1>
+</div>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <div class="post" data-post-id="<%= post.id %>">
+      <%= render post %>
+    </div>
+  <% end %>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $(".post").click(function() {
+      var postId = $(this).data("post-id");
+      window.location.href = "/posts/" + postId; 
+    });
+  });
+</script>
