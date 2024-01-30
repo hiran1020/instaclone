@@ -1,19 +1,39 @@
-
-<% if notice.present? %>
-  <div class="alert alert-success" role="alert">
-    <%= notice %>
-  </div>
-<% else %>
-  <!-- Hide the alert if notice is empty -->
+<% if @post %>
+  <!-- Render post details or use appropriate partial -->
+  <%= render @post %>
 <% end %>
 
-<%= render @post %>
-
 <div class="container px-4 text-center">
-  <%= link_to "Edit", edit_post_path(@post), class:"btn btn-secondary" %> |
-  <%= link_to "Back to posts", posts_path, class:"btn btn-secondary" %>
-  
-  <%= button_to "Destroy this post", @post, method: :delete, class:"btn mt-2 btn-outline-danger" %> 
-
+  <%= link_to "Edit", edit_post_path(@post), class: "btn btn-secondary" %> |
+  <%= link_to "Back to posts", posts_path, class: "btn btn-secondary" %>  
+  <%= button_to "Destroy this post", @post, method: :delete, class: "btn mt-2 btn-outline-danger" %> 
 </div>
 
+<!-- Display existing messages -->
+<div class="card border-success mb-3 container text-center text-md-start mt-5" id="messages">
+  <% if @post && @post.messages.any? %>
+    <% @post.messages.each_with_index do |message, index| %>
+    <% if index.even? %>
+      <div class="message-blue">
+    <% else %>
+      <div class="message-orange">
+    <% end %>
+      <p class="message-content"><%= message.content %></p>
+      <div class="message-timestamp-left">Comment <%= message.created_at.strftime('%H:%M') %></div>
+    </div>
+  
+    <% end %>
+  <% elsif @post %>
+    <p>No messages yet.</p>
+  <% end %>
+</div>
+
+
+<!-- Form for new message -->
+<div class="container px-4 text-center">
+
+  <%= form_with(model: [@post, Message.new], url: post_messages_path(@post)) do |form| %>
+  <%= form.text_area :content, class: "form-control m-2" %>
+  <%= form.submit "Send Comments", class:"btn btn-outline-success" %>
+  <% end %>
+</div>

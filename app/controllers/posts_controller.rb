@@ -6,6 +6,14 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+def search
+  @keyword = params[:keyword]
+  @posts = Post.where("keywords LIKE ?", "%#{@keyword}%")
+  render 'search_results'
+end
+
+
+
   # GET /posts/1 or /posts/1.json
   def show
   end
