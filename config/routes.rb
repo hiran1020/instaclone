@@ -1,27 +1,25 @@
 Rails.application.routes.draw do
-  get 'rooms/index'
+  get 'users/new'
+  get 'users/create'
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'  # POST request to handle login
+  get 'logout', to: 'sessions#destroy', as: :logout
+
+  resources :users, only: [:new, :create, :show]  # Define routes for user registration
+  
+  
   resources :posts do
     collection do
       get 'search'
     end
     resources :messages
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+
+
+  # Route for health check
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
-   root "posts#index"
-   
-   get '/signin', to: 'sessions#new'
-   post '/signin', to: 'sessions#create'
-   delete '/signout', to: 'sessions#destroy'
-
-  resources :rooms
-
-  resources :users
-
-
+  # Root path
+  root "sessions#new"  # Redirect to login page by default
 end

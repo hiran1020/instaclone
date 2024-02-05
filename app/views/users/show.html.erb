@@ -1,0 +1,47 @@
+  <div class="container db-social">
+    <div class="jumbotron jumbotron-fluid"></div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-xl-11">
+                <div class="widget head-profile has-shadow">
+                    <div class="widget-body pb-0 pt-1">
+                        <div class="row d-flex align-items-center">
+                            <div class="container mt-5">
+                                <ul>
+                                    <li>
+                                        <div class="counter"><%= User.count %></div>
+                                        <div class="heading">Friends</div>
+                                    </li>
+                                    <li>
+                                        <div class="counter"> <%= @user.posts.count  *  User.count %> </div>
+                                        <div class="heading">Likes</div>
+                                    </li>
+                                    <li>
+                                        <div class="counter"> <%= @user.posts.count %> </div>
+                                        <div class="heading">Post</div>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                            <div class="container">
+                                <div class="image-default">
+                                    <img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="Profile Picture">
+                                </div>
+                                <div class="infos">
+                                    <h2><%= @user.name %></h2>
+                                    <div class="location"><%= @user.email %></div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="follow">
+                                    <a class="btn btn-shadow" href="#"><i class="la la-user-plus"></i>Edit <i class="fas fa-edit"></i></a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -29,7 +29,7 @@ end
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
 
     respond_to do |format|
       if @post.save
@@ -73,6 +73,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :description, :keywords)
+      params.require(:post).permit(:title, :description, :keywords, :image)
     end
 end
