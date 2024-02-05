@@ -24,6 +24,10 @@
       <%= form.label :keywords, class: "form-label" %>
       <%= form.text_field :keywords, class: "form-control" %>
     </div>
+    <div class="mb-3">
+      <%= form.label :image %>
+      <%= form.file_field :image, class: "form-control" %>
+    </div>
 
     <div class="mb-3">
       <%= form.submit class: "btn btn-primary" %>

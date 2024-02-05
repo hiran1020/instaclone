@@ -5,14 +5,31 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" >
-      <%= link_to "Home", root_path, class:"navbar-brand btn btn-outline-success" %>
+      <%= link_to "Home", posts_path, class:"navbar-brand btn btn-outline-success" %>
       
     </a>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item nav-link">
             <button type="button" class="btn btn-outline-success position-relative">
-              <%= link_to "Posts", post_path(Post.last.id) ,class:"text-decoration-none text-dark"%>   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"> <%=Post.all.count %> <span class="visually-hidden">unread messages</span></span>
+
+
+              <% if Post.any? %>
+  <%= link_to "Posts", post_path(Post.last.id), class: "text-decoration-none text-dark" %>
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+    <%= Post.all.count %> <span class="visually-hidden">unread messages</span>
+</span>
+<% else %>
+  <%= link_to "Posts", posts_path, class: "text-decoration-none text-dark" %>
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+    0 <span class="visually-hidden">unread messages</span>
+  </span>
+<% end %>
+
+
+
+
+
             </button>
         </li>
         <li class="nav-item">
@@ -24,10 +41,39 @@
          <%= link_to "New Post", new_post_path, class:"btn btn-outline-success text-dark" %>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+
+
+      
+      
+     <div class="row">
+       
+      <div class="col-md-6">
+  <%= form_tag(search_posts_path, method: :get, class: "d-flex", id: "search-form") do %>
+    <%= text_field_tag :keyword, params[:keyword], placeholder: "Enter keyword", class: "form-control me-2", id: "search-bar" %>
+    <%= submit_tag "Search", class: "btn btn-outline-success", id: "search-button", style: "display:none;" %>
+  <% end %>
+</div>
+
+<div class="col-md-6">
+
+
+  <%= link_to "Logout", logout_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-success" %>
+</div>
+</div>
+    <%= link_to "profile", user_path(current_user), class: "btn btn-outline-success"%>
+
     </div>
   </div>
 </nav>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var searchBar = $('#search-bar');
+    var searchButton = $('#search-button');
+
+    searchBar.on('input', function() {
+      searchButton.toggle($(this).val().trim() !== ''); // Show the button only if there's text
+    });
+  });
+</script>

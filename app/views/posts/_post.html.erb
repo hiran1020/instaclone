@@ -1,11 +1,17 @@
 <div id="<%= dom_id post %>">
   <div class="card border-success mb-3 container text-center text-md-start mt-5" style="max-width: 18rem;">
-  <div class="card-header bg-transparent border-success"> <%= post.keywords %>r</div>
-  <div class="card-body text-success">
-    <h5 class="card-title"> <%= post.title %></h5>
-    <p class="card-text"> <%= post.description %></p>
+    <div class="card-header bg-transparent border-success">
+      <span>
+
+        <%= post.user&.name || "unknown user" %>
+      </span>
+    </div>
+    <div class="card-body text-success">
+      <h5 class="card-title"><%= post.title %></h5>
+      <p class="card-text"><%= post.description %></p>
+    </div>
+    <div class="card-footer bg-transparent border-success">
+      <small>Created At: <%= post.updated_at.strftime("%d %B %H:%M:%S") %></small>
+    </div>
   </div>
-  <div class="card-footer bg-transparent border-success"><small>Created At: <%= post.updated_at.strftime(" %d %B %H:%M:%S") %> </small></div>
-</div>
-    
 </div>

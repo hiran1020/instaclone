@@ -1,0 +1,19 @@
+<h1> All Comments</h1>
+
+<div class="card border-success mb-3 container text-center text-md-start mt-5" id="messages">
+  <% if @post && @post.messages.any? %>
+    <% @post.messages.each_with_index do |message, index| %>
+      <% if index.even? %>
+        <div class="message-blue">
+      <% else %>
+        <div class="message-orange">
+      <% end %>
+        <p class="message-content"><%= message.content %></p>
+        <div class="message-timestamp-left">Comment <%= message.created_at.strftime('%H:%M') %></div>
+      </div>
+    <% end %>
+  <% elsif @post %>
+    <p>No messages yet.</p>
+  <% end %>
+
+</div>
